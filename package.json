@@ -1,0 +1,27 @@
+{
+  "name": "scheduler",
+  "version": "0.0.1",
+  "description": "using github action to run scheduler jobs",
+  "main": "index.ts",
+  "author": "511",
+  "license": "ISC",
+  "scripts": {
+    "test": "ts-node ./test.ts",
+    "serve": "ts-node ./index.ts",
+    "log": "ts-node ./log.ts",
+    "lint": "prettier --write '**/*.{ts,js}'"
+  },
+  "keywords": [
+    "github",
+    "action"
+  ],
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.0.0",
+    "playwright": "^1.23.0",
+    "ts-node": "^10.9.1"
+  }
+}
