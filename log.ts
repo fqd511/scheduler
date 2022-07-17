@@ -1,4 +1,3 @@
-import { db, notionToken } from "./localConfig";
 /**
  * By 511 at 22/07/16/ 周六 21:59
  * @Desc: read local file(log.json),send to notion database
@@ -10,7 +9,7 @@ const fs = require("fs");
 
 // Initializing a client
 const notion = new Client({
-  auth: process.env.NOTION_TOKEN || notionToken,
+  auth: process.env.NOTION_TOKEN,
 });
 
 try {
@@ -20,7 +19,7 @@ try {
       notion.pages.create({
         parent: {
           type: "database_id",
-          database_id: process.env.DATABASE_ID || db,
+          database_id: process.env.DATABASE_ID,
         },
         properties: log,
       });
@@ -29,7 +28,7 @@ try {
     notion.pages.create({
       parent: {
         type: "database_id",
-        database_id: process.env.DATABASE_ID || db,
+        database_id: process.env.DATABASE_ID,
       },
       properties: data as Log,
     });

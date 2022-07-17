@@ -1,6 +1,4 @@
-import { gfwPwd } from "./../localConfig";
 import { chromium } from "playwright";
-import { gfwUsername } from "../localConfig";
 
 const username = process.env.GFW_USERNAME;
 const pwd = process.env.GFW_PWD;
@@ -18,8 +16,8 @@ export const GFWCheckIn = async () => {
   await page.goto("https://136900.xyz/auth/login", { timeout: 0 });
 
   // login
-  await page.locator("input#email").fill(username || gfwUsername);
-  await page.locator("input#password").fill(pwd || gfwPwd);
+  await page.locator("input#email").fill(username!);
+  await page.locator("input#password").fill(pwd!);
   await page.locator('button:has-text("登录")').click({ timeout: 0 });
 
   await page.locator("text=Read").click({ timeout: 0 });
