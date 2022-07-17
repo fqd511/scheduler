@@ -1,0 +1,28 @@
+name: "Scheduler Jobs Bot"
+
+on:
+  schedule:
+    - cron: "0 1 11 * *"
+env:
+  NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+  DATABASE_ID: ${{ secrets.DATABASE_ID }}
+  GFW_USERNAME: ${{ secrets.GFW_USERNAME }}
+  GFW_PWD: ${{ secrets.GFW_PWD }}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout codes"
+        uses: actions/checkout@v3
+      - name: "Setup Node.js environment"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: "install dependencies"
+        run: npm i
+      - name: "executing jobs"
+        run: npm run serve
+      - name: "log to notion"
+        run: npm run log

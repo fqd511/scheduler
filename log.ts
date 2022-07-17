@@ -3,21 +3,13 @@
  * @Desc: read local file(log.json),send to notion database
  */
 
-import { LogSourceTypeEnum, LogLevelEnum, Log } from "./type";
-import {
-  APIErrorCode,
-  ClientErrorCode,
-  isNotionClientError,
-} from "@notionhq/client";
-import { db, notionToken } from "./localConfig";
-import { getISODate } from "./utils";
+import { Log } from "./type";
 const { Client } = require("@notionhq/client");
 const fs = require("fs");
 
 // Initializing a client
 const notion = new Client({
-  auth: notionToken,
-  //    auth: process.env.NOTION_TOKEN,
+  auth: process.env.NOTION_TOKEN,
 });
 
 try {
@@ -27,7 +19,7 @@ try {
       notion.pages.create({
         parent: {
           type: "database_id",
-          database_id: db,
+          database_id: process.env.DATABASE_ID,
         },
         properties: log,
       });
@@ -36,7 +28,7 @@ try {
     notion.pages.create({
       parent: {
         type: "database_id",
-        database_id: db,
+        database_id: process.env.DATABASE_ID,
       },
       properties: data as Log,
     });

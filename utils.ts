@@ -32,7 +32,7 @@ export function getISODate(date = new Date()) {
  * @param log
  */
 export function log(log: Log) {
-  const { type, subType, desc, timestamp, level } = log;
+  const { type, subType, desc, timestamp = getISODate(), level } = log;
   const logItem = {
     desc: {
       title: [
