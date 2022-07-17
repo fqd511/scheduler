@@ -1,6 +1,7 @@
 name: "Scheduler Jobs Bot"
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 1 11 * *"
 env:
