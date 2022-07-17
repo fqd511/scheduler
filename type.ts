@@ -20,8 +20,8 @@ export enum LogLevelEnum {
 export interface Log {
   /* log source type */
   type: LogSourceTypeEnum;
-  /* sub-type, temporarily string  */
-  subType: string;
+  /* sub-type, main-key in notion database  */
+  name: string;
   /* log content */
   desc: string;
   /* date in ISO format */

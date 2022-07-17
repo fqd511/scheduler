@@ -9,7 +9,7 @@ import { getISODate, log } from "./utils";
 const serviceList = [
   {
     service: GFWCheckIn,
-    desc: "光速云每日签到",
+    name: "光速云每日签到",
   },
 ];
 
@@ -17,32 +17,32 @@ executeList();
 process.exit();
 
 export function executeList() {
-  serviceList.forEach(({ service, desc }) => {
+  serviceList.forEach(({ service, name }) => {
     try {
       service()
         .then((msg) => {
           log({
             desc: msg,
             type: LogSourceTypeEnum.GA,
-            subType: desc,
+            name,
             level: LogLevelEnum.success,
             timestamp: getISODate(),
           });
         })
         .catch((err) => {
-          handleError(err as Error, desc);
+          handleError(err as Error, name);
         });
     } catch (error: unknown) {
-      handleError(error as Error, desc);
+      handleError(error as Error, name);
     }
-  });  
+  });
 }
 
-function handleError(error: Error, desc: string) {
+function handleError(error: Error, name: string) {
   log({
     desc: error.message,
     type: LogSourceTypeEnum.GA,
-    subType: desc,
+    name,
     level: LogLevelEnum.error,
     timestamp: getISODate(),
   });
