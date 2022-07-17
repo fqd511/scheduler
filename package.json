@@ -12,8 +12,7 @@
     "lint": "prettier --write '**/*.{ts,js}'"
   },
   "keywords": [
-    "github",
-    "action"
+    "github action"
   ],
   "devDependencies": {
     "@types/node": "^18.0.0",
