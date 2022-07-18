@@ -14,7 +14,6 @@ const serviceList = [
 ];
 
 executeList();
-process.exit();
 
 export function executeList() {
   serviceList.forEach(({ service, name }) => {
