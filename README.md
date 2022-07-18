@@ -1,4 +1,5 @@
 ## Scheduler
+[![Scheduler Jobs Bot](https://github.com/fqd511/scheduler/actions/workflows/scheduler.yaml/badge.svg)](https://github.com/fqd511/scheduler/actions/workflows/scheduler.yaml)
 
 Here i use github actions to run scheduler jobs, mostly cron jobs.
 
