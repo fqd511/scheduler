@@ -41,11 +41,11 @@
      level = LogLevelEnum.info,
    } = log;
    const logItem = {
-     desc: {
+     name: {
        title: [
          {
            text: {
-             content: desc,
+             content: name,
            },
          },
        ],
@@ -60,11 +60,11 @@
          name: type,
        },
      },
-     name: {
+     desc: {
        rich_text: [
          {
            text: {
-             content: name,
+             content: desc,
            },
          },
        ],
