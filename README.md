@@ -8,9 +8,6 @@ Here i use github actions to run scheduler jobs, mostly cron jobs.
 # install dependencies
 npm i
 
-# execute jobs and store output log to local file(log.json)
+# execute jobs and send output log to notion db
 npm run serve
-
-# send log to notion database (config env first)
-npm run log 
 ```

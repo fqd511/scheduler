@@ -7,8 +7,6 @@
   "license": "ISC",
   "scripts": {
     "serve": "ts-node ./index.ts",
-    "log": "ts-node ./log.ts",
-    "test": "npm run serve && npm run log",
     "lint": "prettier --write '**/*.{ts,js}'"
   },
   "keywords": [

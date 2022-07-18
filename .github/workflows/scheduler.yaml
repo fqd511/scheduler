@@ -25,5 +25,3 @@ jobs:
         run: npm i
       - name: "executing jobs"
         run: npm run serve
-      - name: "log to notion"
-        run: npm run log

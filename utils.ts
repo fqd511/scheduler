@@ -3,6 +3,7 @@
  * @Desc: utils
  */
 
+import { LogSourceTypeEnum } from "./type";
 import { Log } from "./type";
 const fs = require("fs");
 
@@ -31,8 +32,14 @@ export function getISODate(date = new Date()) {
  * formet log into notion-format and write to local file
  * @param log
  */
-export function log(log: Log) {
-  const { type, name, desc, timestamp = getISODate(), level } = log;
+export function log(log: Partial<Log>) {
+  const {
+    type = LogSourceTypeEnum.Other,
+    name = "",
+    desc = "",
+    timestamp = getISODate(),
+    level = LogLevelEnum.info,
+  } = log;
   const logItem = {
     desc: {
       title: [
@@ -68,19 +75,17 @@ export function log(log: Log) {
       },
     },
   };
-  let data = null;
-  // read local file
-  try {
-    const fileData = JSON.parse(fs.readFileSync("./log.json", "utf8"));
-    if (Array.isArray(fileData)) {
-      data = fileData;
-    } else {
-      data = [];
-    }
-  } catch (e) {
-    console.error("read log file error");
-    data = [];
-  }
-  data.push(logItem);
-  fs.writeFileSync("./log.json", JSON.stringify(data));
+
+  // Initializing a client
+  const notion = new Client({
+    auth: process.env.NOTION_TOKEN,
+  });
+
+  notion.pages.create({
+    parent: {
+      type: "database_id",
+      database_id: process.env.DATABASE_ID,
+    },
+    properties: logItem,
+  });
 }

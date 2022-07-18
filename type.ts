@@ -5,6 +5,7 @@
 
 export enum LogSourceTypeEnum {
   GA = "github_action",
+  Other = "other",
 }
 
 export enum LogLevelEnum {
