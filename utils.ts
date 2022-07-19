@@ -64,7 +64,7 @@ export function log(log: Partial<Log>): Promise<any> {
       rich_text: [
         {
           text: {
-            content: desc,
+            content: desc.split(`\n`)[0],
           },
         },
       ],
