@@ -3,7 +3,7 @@ name: "Scheduler Jobs Bot"
 on:
   workflow_dispatch:
   schedule:
-    - cron: "12 1 * * *"
+    - cron: "16 0 * * *"
 env:
   NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
   DATABASE_ID: ${{ secrets.DATABASE_ID }}
