@@ -12,3 +12,7 @@ npm i
 # execute jobs and send output log to notion db
 npm run serve
 ```
+
+### Todo
+
+- [ ] integret notion handler into another lib

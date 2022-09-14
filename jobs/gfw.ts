@@ -6,10 +6,6 @@ const pwd = process.env.GFW_PWD;
 export const GFWCheckIn = async () => {
   const browser = await chromium.launch({
     timeout: 0,
-    logger: {
-      isEnabled: (name) => name === "browser",
-      log: (name, severity, message) => console.log(`${name} ${message}`),
-    },
   });
 
   const page = await browser.newPage();
