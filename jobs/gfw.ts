@@ -9,8 +9,7 @@ export const GFWCheckIn = async () => {
   });
 
   const page = await browser.newPage();
-  await page.goto("https://136900.xyz/auth/login", { timeout: 0 });
-
+  await page.goto("https://guangsu.buzz/auth/login", { timeout: 0 });
   // login
   await page.locator("input#email").fill(username!);
   await page.locator("input#password").fill(pwd!);

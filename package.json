@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@notionhq/client": "^2.0.0",
+    "dotenv": "^16.0.2",
     "playwright": "^1.23.0",
     "ts-node": "^10.9.1"
   }

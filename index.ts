@@ -2,6 +2,7 @@
  * By 511 at 22/07/16/ 周六 22:00
  * @Desc: run scheduler jobs
  */
+require('dotenv').config();
 import { LogLevelEnum, LogSourceTypeEnum } from "./type";
 import { GFWCheckIn } from "./jobs/gfw";
 import { getISODate, log } from "./utils";

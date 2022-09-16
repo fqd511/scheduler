@@ -2,3 +2,4 @@ node_modules
 localConfig.ts
 log.json
 .idea
+.env
