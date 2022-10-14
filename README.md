@@ -13,6 +13,10 @@ npm i
 npm run serve
 ```
 
+### Currently jobs
+
+- auto-signin
+
 ### Todo
 
 - [ ] integret notion handler into another lib
