@@ -37,6 +37,7 @@ export function log(log: Partial<Log>): Promise<any> {
     type = LogSourceTypeEnum.Other,
     name = "",
     desc = "",
+    // TODO this is not neccessary, use notion time
     timestamp = getISODate(),
     level = LogLevelEnum.info,
   } = log;
