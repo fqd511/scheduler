@@ -2,12 +2,6 @@ name: "Update Commit Bot"
 
 on:
   workflow_dispatch:
-env:
-  NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-  DATABASE_ID: ${{ secrets.DATABASE_ID }}
-  GFW_USERNAME: ${{ secrets.GFW_USERNAME }}
-  GFW_PWD: ${{ secrets.GFW_PWD }}
-
 jobs:
   run:
     runs-on: ubuntu-latest
