@@ -1,4 +1,4 @@
-name: "Scheduler Jobs Bot"
+name: "Update Commit Bot"
 
 on:
   workflow_dispatch:
