@@ -20,4 +20,4 @@ npm run serve
 ### Todo
 
 - [ ] integret notion handler into another lib
-- [ ] set auto-commit bot on a physical mechine
+- [ ] set auto-commit bot on a physical machine

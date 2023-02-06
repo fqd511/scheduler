@@ -25,3 +25,5 @@ jobs:
         run: npm i
       - name: "executing jobs"
         run: npm run serve
+      - name: "update log and commit"
+        run: npm run update

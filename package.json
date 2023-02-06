@@ -7,6 +7,7 @@
   "license": "ISC",
   "scripts": {
     "serve": "ts-node ./index.ts",
+    "update": "chmod +x ./update_time.sh && ./update_time.sh",
     "lint": "prettier --write '**/*.{ts,js}'"
   },
   "keywords": [
