@@ -1,0 +1,23 @@
+name: "Scheduler Jobs Bot"
+
+on:
+  workflow_dispatch:
+env:
+  NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+  DATABASE_ID: ${{ secrets.DATABASE_ID }}
+  GFW_USERNAME: ${{ secrets.GFW_USERNAME }}
+  GFW_PWD: ${{ secrets.GFW_PWD }}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout codes"
+        uses: actions/checkout@v3
+      - name: "Setup Node.js environment"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: "update log and commit"
+        run: npm run update
