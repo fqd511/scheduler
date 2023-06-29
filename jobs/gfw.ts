@@ -9,6 +9,7 @@ export const GFWCheckIn = async () => {
   });
 
   const page = await browser.newPage();
+  // backup url https://gs188.one
   await page.goto("https://guangsu.buzz/auth/login", { timeout: 0 });
   // login
   await page.locator("input#email").fill(username!);
