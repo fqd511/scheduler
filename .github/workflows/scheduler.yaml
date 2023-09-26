@@ -9,6 +9,7 @@ env:
   DATABASE_ID: ${{ secrets.DATABASE_ID }}
   GFW_USERNAME: ${{ secrets.GFW_USERNAME }}
   GFW_PWD: ${{ secrets.GFW_PWD }}
+  BARK_KEY: ${{ secrets.BARK_KEY }}
 
 jobs:
   run:

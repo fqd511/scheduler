@@ -77,6 +77,11 @@ export function log(log: Partial<Log>): Promise<any> {
     },
   };
 
+  // send error log to mobile notification
+  if (log.level === LogLevelEnum.error) {
+    notifyThroughBark(log);
+  }
+
   // Initializing a client
   const notion = new Client({
     auth: process.env.NOTION_TOKEN,
@@ -89,4 +94,33 @@ export function log(log: Partial<Log>): Promise<any> {
     },
     properties: logItem,
   });
+}
+
+// send notification through bark
+async function notifyThroughBark(log: Partial<Log>) {
+  try {
+    const response = await fetch(`https://api.day.app/push`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify({
+        body: log.desc || "-",
+        title: log.name || "-",
+        level: "passive",
+        group: "Github Action",
+        device_key: process.env.BARK_KEY,
+      }),
+    });
+
+    if (!response.ok) {
+      return new Error("Bark notify failed");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    return error;
+  }
 }

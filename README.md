@@ -21,3 +21,4 @@ npm run serve
 
 - [ ] integret notion handler into another lib
 - [x] set auto-commit bot
+- [x] notification when error
