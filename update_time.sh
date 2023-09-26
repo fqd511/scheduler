@@ -13,5 +13,5 @@ if (( current_date % 9 == 0 )); then
     git push origin main
 else
     echo "skip log"
-    exit 1
+    exit 0
 fi
