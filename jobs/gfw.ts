@@ -9,8 +9,8 @@ export const GFWCheckIn = async () => {
   });
 
   const page = await browser.newPage();
-  // backup url https://gs188.one
-  await page.goto("https://gs188.one/auth/login", { timeout: 0 });
+  // open website
+  await page.goto("https://gs188.one/auth/login", { timeout: 10000 });
   // login
   await page.locator("input#email").fill(username!);
   await page.locator("input#password").fill(pwd!);
