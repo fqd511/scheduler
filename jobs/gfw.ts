@@ -10,11 +10,11 @@ export const GFWCheckIn = async () => {
 
   const page = await browser.newPage();
   // open website
-  await page.goto("https://gs188.one/auth/login", { timeout: 10000 });
+  await page.goto("https://gs188.one/auth/login", { timeout: 20000 });
   // login
   await page.locator("input#email").fill(username!);
   await page.locator("input#password").fill(pwd!);
-  await page.locator('button:has-text("登录")').click({ timeout: 0 });
+  await page.locator('button:has-text("登录")').click({ timeout: 20000 });
 
   await page.locator("text=Read").click({ timeout: 0 });
 
