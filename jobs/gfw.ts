@@ -10,7 +10,7 @@ export const GFWCheckIn = async () => {
 
   const page = await browser.newPage();
   // open website
-  await page.goto("https://gs188.one/auth/login", { timeout: 20000 });
+  await page.goto("https://gs999.buzz/auth/login", { timeout: 20000 });
   // login
   await page.locator("input#email").fill(username!);
   await page.locator("input#password").fill(pwd!);
