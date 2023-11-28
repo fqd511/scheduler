@@ -8,10 +8,11 @@ import { GFWCheckIn } from "./jobs/gfw";
 import { getISODate, log } from "./utils";
 
 const serviceList = [
-  {
-    service: GFWCheckIn,
-    name: "光速云每日签到",
-  },
+  // new website has no sign-in bonus
+  // {
+  //   service: GFWCheckIn,
+  //   name: "光速云每日签到",
+  // },
 ];
 
 Promise.all(
