@@ -2,35 +2,39 @@
  * By 511 at 22/07/16/ 周六 22:00
  * @Desc: run scheduler jobs
  */
-require('dotenv').config();
+require("dotenv").config();
 import { LogLevelEnum, LogSourceTypeEnum } from "./type";
 import { GFWCheckIn } from "./jobs/gfw";
 import { getISODate, log } from "./utils";
 
 const serviceList = [
   // new website has no sign-in bonus
-  // {
-  //   service: GFWCheckIn,
-  //   name: "光速云每日签到",
-  // },
+  {
+    service: null,
+    name: "光速云每日签到",
+  },
 ];
 
 Promise.all(
   serviceList.map(({ service, name }) => {
     try {
-      return service()
-        .then((msg) => {
-          return log({
-            desc: msg,
-            type: LogSourceTypeEnum.GA,
-            name,
-            level: LogLevelEnum.success,
-            timestamp: getISODate(),
+      if (service) {
+        return service()
+          .then((msg) => {
+            return log({
+              desc: msg,
+              type: LogSourceTypeEnum.GA,
+              name,
+              level: LogLevelEnum.success,
+              timestamp: getISODate(),
+            });
+          })
+          .catch((err) => {
+            return handleError(err as Error, name);
           });
-        })
-        .catch((err) => {
-          return handleError(err as Error, name);
-        });
+      } else {
+        return;
+      }
     } catch (error: unknown) {
       return handleError(error as Error, name);
     }
