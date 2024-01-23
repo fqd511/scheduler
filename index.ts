@@ -7,10 +7,14 @@ import { LogLevelEnum, LogSourceTypeEnum } from "./type";
 import { GFWCheckIn } from "./jobs/gfw";
 import { getISODate, log } from "./utils";
 
-const serviceList = [
+interface Service {
+  service?: () => Promise<any>;
+  name: string;
+}
+const serviceList: Service[] = [
   // new website has no sign-in bonus
   {
-    service: null,
+    service: undefined,
     name: "光速云每日签到",
   },
 ];
@@ -19,8 +23,8 @@ Promise.all(
   serviceList.map(({ service, name }) => {
     try {
       if (service) {
-        return service()
-          .then((msg) => {
+        return service?.()
+          .then((msg: string) => {
             return log({
               desc: msg,
               type: LogSourceTypeEnum.GA,
@@ -29,7 +33,7 @@ Promise.all(
               timestamp: getISODate(),
             });
           })
-          .catch((err) => {
+          .catch((err: any) => {
             return handleError(err as Error, name);
           });
       } else {
