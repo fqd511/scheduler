@@ -1,3 +1,4 @@
+#!/bin/bash
 # get current date
 current_date=$(date +%d)
 
