@@ -2,6 +2,7 @@ import { chromium } from "playwright";
 
 const username = process.env.GFW_USERNAME;
 const pwd = process.env.GFW_PWD;
+const websiteUrl = process.env.GFW_URL||'';
 
 export const GFWCheckIn = async () => {
   const browser = await chromium.launch({
@@ -10,7 +11,7 @@ export const GFWCheckIn = async () => {
 
   const page = await browser.newPage();
   // open website
-  await page.goto("https://gs999.buzz/auth/login", { timeout: 20000 });
+  await page.goto(websiteUrl, { timeout: 20000 });
   // login
   await page.locator("input#email").fill(username!);
   await page.locator("input#password").fill(pwd!);
