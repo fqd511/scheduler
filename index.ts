@@ -14,7 +14,7 @@ interface Service {
 const serviceList: Service[] = [
   // new website has no sign-in bonus
   {
-    service: undefined,
+    service: GFWCheckIn,
     name: "光速云每日签到",
   },
 ];
