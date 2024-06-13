@@ -7,6 +7,7 @@ const websiteUrl = process.env.GFW_URL||'';
 export const GFWCheckIn = async () => {
   const browser = await chromium.launch({
     timeout: 0,
+    // headless:false,
   });
 
   const page = await browser.newPage();
@@ -15,7 +16,7 @@ export const GFWCheckIn = async () => {
   // login
   await page.locator("input#email").fill(username!);
   await page.locator("input#password").fill(pwd!);
-  await page.locator('button:has-text("登录")').click({ timeout: 20000 });
+  await page.locator('button:has-text("登录")').nth(0).click({ timeout: 20000 });
 
   await page.locator("text=Read").click({ timeout: 0 });
 
