@@ -12,13 +12,16 @@ export const GFWCheckIn = async () => {
 
   const page = await browser.newPage();
   // open website
-  await page.goto(websiteUrl, { timeout: 20000 });
+  await page.goto(websiteUrl, { timeout: 20000,waitUntil: 'networkidle' });
   // login
   await page.locator("input#email").fill(username!);
   await page.locator("input#password").fill(pwd!);
+
+  await page.waitForSelector('button:has-text("登录")', { state: 'visible', timeout: 30000 });
+
   const ele = await page.locator('button:has-text("登录")');
   console.log(JSON.stringify(ele));
-  
+
   await page.locator('button:has-text("登录")').nth(0).click({ timeout: 20000 });
 
   await page.locator("text=Read").click({ timeout: 0 });
@@ -40,6 +43,6 @@ export const GFWCheckIn = async () => {
       );
     }
   } else {
-    throw new Error("gfw fail:一开始就不是 每日签到");
+    throw new Error("gfw fail:不是 每日签到,而是" + checkInLabel);
   }
 };
