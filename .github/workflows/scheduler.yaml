@@ -25,6 +25,17 @@ jobs:
         with:
           node-version: 20
 
+      - name: "Debug cache keys"
+        run: |
+          echo "Node.js Cache Key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}"
+          echo "Playwright Cache Key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}"
+
+      - name: "Check Node.js modules path"
+        run: ls -al node_modules || echo "node_modules not found"
+
+      - name: "Check Playwright cache path"
+        run: ls -al ~/.cache/ms-playwright || echo "Playwright cache not found"
+
       - name: "Cache Node.js modules"
         uses: actions/cache@v3
         with:
@@ -46,8 +57,14 @@ jobs:
       - name: "Install dependencies"
         run: npm ci
 
+      - name: "Check Node.js modules path after install"
+        run: ls -al node_modules
+
       - name: "Install Playwright browsers"
         run: npx playwright install --with-deps
+
+      - name: "Check Playwright cache path after install"
+        run: ls -al ~/.cache/ms-playwright
 
       - name: "Executing jobs"
         run: npm run serve
