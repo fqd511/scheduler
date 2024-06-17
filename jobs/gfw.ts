@@ -16,6 +16,9 @@ export const GFWCheckIn = async () => {
   // login
   await page.locator("input#email").fill(username!);
   await page.locator("input#password").fill(pwd!);
+  const ele = await page.locator('button:has-text("登录")');
+  console.log(JSON.stringify(ele));
+  
   await page.locator('button:has-text("登录")').nth(0).click({ timeout: 20000 });
 
   await page.locator("text=Read").click({ timeout: 0 });
