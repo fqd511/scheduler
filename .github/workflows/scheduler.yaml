@@ -25,6 +25,8 @@ jobs:
           node-version: 20
       - name: "install dependencies"
         run: npm i
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
       - name: "executing jobs"
         run: npm run serve
       - name: "update log and commit"
