@@ -12,15 +12,15 @@ export const GFWCheckIn = async () => {
 
   const page = await browser.newPage();
   // open website
-  await page.goto(websiteUrl, { timeout: 20000});
+  await page.goto(websiteUrl, { timeout: 20000 });
   // login
   await page.locator("input#email").fill(username!);
   await page.locator("input#password").fill(pwd!);
 
   // @ts-ignore
-  await page.locator('form').evaluate(form => form.submit());
+  // await page.locator('form').evaluate(form => form.submit());
 
-  // await page.locator('button:has-text("登录")').nth(0).click({ timeout: 20000 });
+  await page.locator("div:nth-of-type(5) > button").click({ timeout: 20000 });
 
   await page.locator("text=Read").click({ timeout: 0 });
 
