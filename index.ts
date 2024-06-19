@@ -15,7 +15,7 @@ const serviceList: Service[] = [
   // new website has no sign-in bonus
   {
     service: GFWCheckIn,
-    name: "光速云每日签到",
+    name: "每日签到-"+process.env.GFW_URL?.split('://')[1].split('/')[0],
   },
 ];
 
