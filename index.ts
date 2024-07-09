@@ -31,7 +31,7 @@ function executeJob({
       return service?.()
         .then((msg: string) => {
           return log({
-            desc: msg,
+            desc: msg+`(retry:${retry})`,
             type: LogSourceTypeEnum.GA,
             name,
             level: LogLevelEnum.success,
