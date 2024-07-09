@@ -8,42 +8,54 @@ import { GFWCheckIn } from "./jobs/gfw";
 import { getISODate, log } from "./utils";
 
 interface Service {
-  service?: () => Promise<any>;
+  service: () => Promise<any>;
   name: string;
+  retry:number;
 }
 const serviceList: Service[] = [
   // new website has no sign-in bonus
   {
     service: GFWCheckIn,
     name: "每日签到-"+process.env.GFW_URL?.split('://')[1].split('/')[0],
+    retry: 3,
   },
 ];
 
-Promise.all(
-  serviceList.map(({ service, name }) => {
-    try {
-      if (service) {
-        return service?.()
-          .then((msg: string) => {
-            return log({
-              desc: msg,
-              type: LogSourceTypeEnum.GA,
-              name,
-              level: LogLevelEnum.success,
-              timestamp: getISODate(),
-            });
-          })
-          .catch((err: any) => {
-            return handleError(err as Error, name);
+function executeJob({
+  service,
+  name,
+  retry,
+}: Service):any {
+  try {
+    if (service) {
+      return service?.()
+        .then((msg: string) => {
+          return log({
+            desc: msg,
+            type: LogSourceTypeEnum.GA,
+            name,
+            level: LogLevelEnum.success,
+            timestamp: getISODate(),
           });
-      } else {
-        return;
-      }
-    } catch (error: unknown) {
-      return handleError(error as Error, name);
+        })
+        .catch((err:any) => {
+          if (retry) {
+            return executeJob({ service, name, retry: retry - 1 });
+          } else {
+            return handleError(err as Error, name);
+          }
+        });
+    } else {
+      return;
     }
-  })
-).then((list) => {
+  } catch (error: unknown) {
+    return handleError(error as Error, name);
+  }
+}
+
+Promise.all(
+  serviceList.map(({ service, name,retry }) => executeJob({ service, name,retry }))
+).then(() => {
   process.exit();
 });
 
