@@ -10,35 +10,31 @@ import { getISODate, log } from "./utils";
 interface Service {
   service: () => Promise<any>;
   name: string;
-  retry:number;
+  retry: number;
 }
 const serviceList: Service[] = [
   // new website has no sign-in bonus
   {
     service: GFWCheckIn,
-    name: "每日签到-"+process.env.GFW_URL?.split('://')[1].split('/')[0],
+    name: "每日签到-" + process.env.GFW_URL?.split("://")[1].split("/")[0],
     retry: 3,
   },
 ];
 
-function executeJob({
-  service,
-  name,
-  retry,
-}: Service):any {
+function executeJob({ service, name, retry }: Service): any {
   try {
     if (service) {
       return service?.()
         .then((msg: string) => {
           return log({
-            desc: msg+`(retry:${retry})`,
+            desc: msg + (retry === 3 ? "" : `(retry:${3 - retry})`),
             type: LogSourceTypeEnum.GA,
             name,
             level: LogLevelEnum.success,
             timestamp: getISODate(),
           });
         })
-        .catch((err:any) => {
+        .catch((err: any) => {
           if (retry) {
             return executeJob({ service, name, retry: retry - 1 });
           } else {
@@ -54,7 +50,9 @@ function executeJob({
 }
 
 Promise.all(
-  serviceList.map(({ service, name,retry }) => executeJob({ service, name,retry }))
+  serviceList.map(({ service, name, retry }) =>
+    executeJob({ service, name, retry })
+  )
 ).then(() => {
   process.exit();
 });
