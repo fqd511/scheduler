@@ -7,16 +7,26 @@ import { LogLevelEnum, LogSourceTypeEnum } from "./type";
 import { GFWCheckIn } from "./jobs/gfw";
 import { getISODate, log } from "./utils";
 
+const username = process.env.GFW_USERNAME;
+const pwd = process.env.GFW_PWD;
+
+const username2 = process.env.GFW_USERNAME_2;
+const pwd2 = process.env.GFW_PWD_2;
+
 interface Service {
   service: () => Promise<any>;
   name: string;
   retry: number;
 }
 const serviceList: Service[] = [
-  // new website has no sign-in bonus
   {
-    service: GFWCheckIn,
+    service: () => GFWCheckIn(username, pwd),
     name: "每日签到-" + process.env.GFW_URL?.split("://")[1].split("/")[0],
+    retry: 3,
+  },
+  {
+    service: () => GFWCheckIn(username2, pwd2),
+    name: "每日签到2-" + process.env.GFW_URL?.split("://")[1].split("/")[0],
     retry: 3,
   },
 ];
