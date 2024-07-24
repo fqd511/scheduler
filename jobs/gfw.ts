@@ -2,7 +2,7 @@ import { chromium } from "playwright";
 
 const websiteUrl = process.env.GFW_URL || "";
 
-export const GFWCheckIn = async (username, pwd) => {
+export const GFWCheckIn = async (username: string, pwd:string) => {
   const browser = await chromium.launch({
     timeout: 0,
     // headless:false,

@@ -7,11 +7,11 @@ import { LogLevelEnum, LogSourceTypeEnum } from "./type";
 import { GFWCheckIn } from "./jobs/gfw";
 import { getISODate, log } from "./utils";
 
-const username = process.env.GFW_USERNAME;
-const pwd = process.env.GFW_PWD;
+const username = process.env.GFW_USERNAME as string;
+const pwd = process.env.GFW_PWD as string;
 
-const username2 = process.env.GFW_USERNAME_2;
-const pwd2 = process.env.GFW_PWD_2;
+const username2 = process.env.GFW_USERNAME_2 as string;
+const pwd2 = process.env.GFW_PWD_2 as string;
 
 interface Service {
   service: () => Promise<any>;
