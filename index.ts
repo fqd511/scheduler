@@ -26,7 +26,7 @@ const serviceList: Service[] = [
   },
   {
     service: () => GFWCheckIn(username2, pwd2),
-    name: "每日签到2-" + process.env.GFW_URL?.split("://")[1].split("/")[0],
+    name: "每日签到-" + process.env.GFW_URL?.split("://")[1].split("/")[0]+'2',
     retry: 3,
   },
 ];

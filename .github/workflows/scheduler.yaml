@@ -8,7 +8,9 @@ env:
   NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
   DATABASE_ID: ${{ secrets.DATABASE_ID }}
   GFW_USERNAME: ${{ secrets.GFW_USERNAME }}
+  GFW_USERNAME_2: ${{ secrets.GFW_USERNAME_2 }}
   GFW_PWD: ${{ secrets.GFW_PWD }}
+  GFW_PWD_2: ${{ secrets.GFW_PWD_2 }}
   GFW_URL: ${{ secrets.GFW_URL }}
   BARK_KEY: ${{ secrets.BARK_KEY }}
 
