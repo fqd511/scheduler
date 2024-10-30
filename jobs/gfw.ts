@@ -2,7 +2,7 @@ import { chromium } from "playwright";
 
 const websiteUrl = process.env.GFW_URL || "";
 
-export const GFWCheckIn = async (username: string, pwd:string) => {
+export const GFWCheckIn = async (username: string, pwd: string) => {
   const browser = await chromium.launch({
     timeout: 0,
     // headless:false,
@@ -20,7 +20,11 @@ export const GFWCheckIn = async (username: string, pwd:string) => {
 
   await page.locator("div:nth-of-type(5) > button").click({ timeout: 20000 });
 
-  await page.locator("text=Read").click({ timeout: 0 });
+  // incase there is a notification popup
+  const tipButton = await page.locator("text=Read");
+  if (tipButton) {
+    tipButton.click({ timeout: 0 });
+  }
 
   const checkInLabel = await page.locator("#checkin-div").textContent();
 
