@@ -11,6 +11,7 @@ export const GFWCheckIn = async (username: string, pwd: string) => {
   const page = await browser.newPage();
   // open website
   await page.goto(websiteUrl, { timeout: 20000 });
+  await page.waitForLoadState("networkidle"); // wait network idle
   // login
   await page.locator("input#email").fill(username!);
   await page.locator("input#password").fill(pwd!);
@@ -20,18 +21,24 @@ export const GFWCheckIn = async (username: string, pwd: string) => {
 
   await page.locator("div:nth-of-type(5) > button").click({ timeout: 20000 });
 
-  // incase there is a notification popup
-  const tipButton = await page.locator("text=Read");
+  await page.waitForLoadState("networkidle"); // wait network idle
 
-  if (page.isClosed()) {
-    throw new Error("The page is closed before clicking the tip button");
+  try {
+    // try wait for tipButton 
+    const tipButton = await page.waitForSelector("text=Read", {
+      timeout: 20000,
+    });
+
+    if (tipButton) {
+      // if found , click it
+      await tipButton.click({ timeout: 20000 });
+    }
+  } catch (error) {
+    console.warn(
+      "Tip button not found, proceeding without clicking it:",
+      error
+    );
   }
-
-  if (tipButton) {
-    await tipButton.waitFor({ state: "visible", timeout: 20000 }); // 等待可见
-    await tipButton.click({ timeout: 20000 });
-  }
-
   const checkInLabel = await page.locator("#checkin-div").textContent();
 
   try {
