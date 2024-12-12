@@ -13,6 +13,9 @@ const pwd = process.env.GFW_PWD as string;
 const username2 = process.env.GFW_USERNAME_2 as string;
 const pwd2 = process.env.GFW_PWD_2 as string;
 
+const username3 = process.env.GFW_USERNAME_3 as string;
+const pwd3 = process.env.GFW_PWD_3 as string;
+
 interface Service {
   service: () => Promise<any>;
   name: string;
@@ -27,6 +30,11 @@ const serviceList: Service[] = [
   {
     service: () => GFWCheckIn(username2, pwd2),
     name: "每日签到-" + process.env.GFW_URL?.split("://")[1].split("/")[0]+'2',
+    retry: 3,
+  },
+  {
+    service: () => GFWCheckIn(username3, pwd3),
+    name: "每日签到-" + process.env.GFW_URL?.split("://")[1].split("/")[0]+'3',
     retry: 3,
   },
 ];
