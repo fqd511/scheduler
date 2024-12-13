@@ -18,7 +18,7 @@ env:
 
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # 使用 Ubuntu 22.04 而不是最新版
 
     steps:
       - name: "Checkout code"
