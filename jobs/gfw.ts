@@ -19,6 +19,10 @@ export const GFWCheckIn = async (username: string, pwd: string) => {
   // @ts-ignore
   // await page.locator('form').evaluate(form => form.submit());
 
+  // 点击 2FA 校验
+  await page.locator('.geetest_btn_click').click({ timeout: 20000 });
+  await page.waitForTimeout(2000); // 等待验证完成
+
   await page.locator("div:nth-of-type(5) > button").click({ timeout: 20000 });
 
   await page.waitForLoadState("networkidle"); // wait network idle
