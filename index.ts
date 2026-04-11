@@ -22,21 +22,22 @@ interface Service {
   retry: number;
 }
 const serviceList: Service[] = [
-  {
-    service: () => GFWCheckIn(username, pwd),
-    name: "每日签到-" + process.env.GFW_URL?.split("://")[1].split("/")[0],
-    retry: 3,
-  },
-  {
-    service: () => GFWCheckIn(username2, pwd2),
-    name: "每日签到-" + process.env.GFW_URL?.split("://")[1].split("/")[0]+'2',
-    retry: 3,
-  },
-  {
-    service: () => GFWCheckIn(username3, pwd3),
-    name: "每日签到-" + process.env.GFW_URL?.split("://")[1].split("/")[0]+'3',
-    retry: 3,
-  },
+  // these jobs now are blocked by the captcha, need to solve it manually
+  // {
+  //   service: () => GFWCheckIn(username, pwd),
+  //   name: "每日签到-" + process.env.GFW_URL?.split("://")[1].split("/")[0],
+  //   retry: 3,
+  // },
+  // {
+  //   service: () => GFWCheckIn(username2, pwd2),
+  //   name: "每日签到-" + process.env.GFW_URL?.split("://")[1].split("/")[0]+'2',
+  //   retry: 3,
+  // },
+  // {
+  //   service: () => GFWCheckIn(username3, pwd3),
+  //   name: "每日签到-" + process.env.GFW_URL?.split("://")[1].split("/")[0]+'3',
+  //   retry: 3,
+  // },
 ];
 
 function executeJob({ service, name, retry }: Service): any {
@@ -69,8 +70,8 @@ function executeJob({ service, name, retry }: Service): any {
 
 Promise.all(
   serviceList.map(({ service, name, retry }) =>
-    executeJob({ service, name, retry })
-  )
+    executeJob({ service, name, retry }),
+  ),
 ).then(() => {
   process.exit();
 });
